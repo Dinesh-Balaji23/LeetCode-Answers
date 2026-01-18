@@ -1,18 +1,13 @@
 class Solution {
     public int[] decimalRepresentation(int n) {
         List<Integer> list = new ArrayList<>();
-        int temp = 1;
-        while(n > 0) {
-            int rem = n % 10;
-            if(rem != 0) list.add(rem * temp);
-            n /= 10;
-            temp *= 10;
+        int k = 0;
+        while (n != 0) {
+            if (n % 10 != 0) list.add((n % 10) * (int)Math.pow(10, k));
+            k++; n /= 10;
         }
-        Collections.sort(list, Collections.reverseOrder());
-        int[] ans = new int[list.size()];
-        for(int i = 0; i < ans.length; i++) {
-            ans[i] = list.get(i);
-        }
-        return ans;
+        int[] res = new int[list.size()];
+        for (int i = 0; i < list.size(); i++) res[list.size() - i - 1] = list.get(i);
+        return res;
     }
 }
